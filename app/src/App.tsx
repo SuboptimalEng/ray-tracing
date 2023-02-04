@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
+const IMAGE_SIZE = 400;
+
 function App() {
-  const imageWidth = 256;
-  const imageHeight = 256;
+  const imageWidth = IMAGE_SIZE;
+  const imageHeight = IMAGE_SIZE;
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
     for (let i = 0; i < imageWidth; i++) {
@@ -15,8 +17,7 @@ function App() {
         let ig = 255.0 * g;
         let ib = 255.0 * b;
 
-        ctx.fillStyle = `rgba(${ir}, ${ig}, ${ib}, 1.0)`;
-        console.log(ctx.fillStyle);
+        ctx.fillStyle = `rgba(${ir}, ${ig}, ${ib}, 1)`;
         ctx.fillRect(i, j, 1, 1);
       }
     }
@@ -31,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      <canvas id="myCanvas" width={256} height={256}></canvas>
+      <canvas id="myCanvas" width={IMAGE_SIZE} height={IMAGE_SIZE}></canvas>
     </div>
   );
 }
