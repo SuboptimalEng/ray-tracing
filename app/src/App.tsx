@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Vec3 } from "./packages/Vec3";
 
 const IMAGE_SIZE = 400;
 
@@ -7,6 +8,15 @@ function App() {
   const imageHeight = IMAGE_SIZE;
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
+    const point = new Vec3();
+    const color = new Vec3();
+
+    const unit = new Vec3(1.0, 1.0, 1.0);
+
+    point.add(unit);
+
+    console.log(point);
+
     for (let i = 0; i < imageWidth; i++) {
       for (let j = 0; j < imageHeight; j++) {
         let r = i / imageWidth;
