@@ -1,4 +1,4 @@
-import { Vec3 } from "./Vec3";
+import { vadd, Vec3, vscale } from "./Vec3";
 
 class Ray {
   origin: Vec3;
@@ -11,7 +11,7 @@ class Ray {
 
   at(t: number): Vec3 {
     // origin + t * direction
-    return this.origin.add(this.direction.scale(t));
+    return vadd(this.origin, vscale(this.direction, t));
   }
 }
 

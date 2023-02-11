@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Vec3 } from "./packages/Vec3";
 
-const IMAGE_SIZE = 400;
+const CANVAS_WIDTH = 400;
+const CANVAS_HEIGHT = 300;
 
 function App() {
-  const imageWidth = IMAGE_SIZE;
-  const imageHeight = IMAGE_SIZE;
+  const canvasWidth = CANVAS_WIDTH;
+  const canvasHeight = CANVAS_HEIGHT;
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
     const point = new Vec3();
@@ -17,10 +18,10 @@ function App() {
 
     console.log(point);
 
-    for (let i = 0; i < imageWidth; i++) {
-      for (let j = 0; j < imageHeight; j++) {
-        let r = i / imageWidth;
-        let g = j / imageHeight;
+    for (let i = 0; i < canvasWidth; i++) {
+      for (let j = 0; j < canvasHeight; j++) {
+        let r = i / canvasWidth;
+        let g = j / canvasHeight;
         let b = 0.25;
 
         let ir = 255.0 * r;
@@ -42,7 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      <canvas id="myCanvas" width={IMAGE_SIZE} height={IMAGE_SIZE}></canvas>
+      <canvas id="myCanvas" width={canvasWidth} height={canvasHeight}></canvas>
     </div>
   );
 }

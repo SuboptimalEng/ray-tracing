@@ -9,6 +9,10 @@ class Vec3 {
     this.z = z;
   }
 
+  getNew() {
+    return new Vec3(this.x, this.y, this.z);
+  }
+
   add(v: Vec3): Vec3 {
     this.x += v.x;
     this.y += v.y;
@@ -48,4 +52,12 @@ class Vec3 {
   }
 }
 
-export { Vec3 };
+const vadd = (a: Vec3, b: Vec3) => {
+  return new Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
+};
+
+const vscale = (a: Vec3, n: number) => {
+  return new Vec3(a.x * n, a.y * n, a.z * n);
+};
+
+export { Vec3, vadd, vscale };
