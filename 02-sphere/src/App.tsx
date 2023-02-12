@@ -64,17 +64,7 @@ function App() {
         ctx.fillStyle = `rgba(${color.x}, ${color.y}, ${color.z}, 1)`;
         // note: paints down as j increases in height, this is done for ease of use
         ctx.fillRect(i, canvasHeight - j, pixelSize, pixelSize);
-
-        // let r = i / canvasWidth;
-        // let g = j / canvasHeight;
-        // let b = 0.25;
-        // let ir = 255.0 * r;
-        // let ig = 255.0 * g;
-        // let ib = 255.0 * b;
-        // ctx.fillStyle = `rgba(${ir}, ${ig}, ${ib}, 1)`;
-        // ctx.fillRect(i, j, 1, 1);
       }
-      // debugger;
     }
   };
 
