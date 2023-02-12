@@ -65,8 +65,12 @@ const vadd = (a: Vec3, b: Vec3): Vec3 => {
   return new Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
 };
 
+const vsub = (a: Vec3, b: Vec3): Vec3 => {
+  return new Vec3(a.x - b.x, a.y - b.y, a.z - b.z);
+};
+
 const vscale = (a: Vec3, n: number): Vec3 => {
   return new Vec3(a.x * n, a.y * n, a.z * n);
 };
 
-export { Vec3, vadd, vscale };
+export { Vec3, vadd, vsub, vscale };
