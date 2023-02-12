@@ -11,7 +11,7 @@ class HittableList {
     this.hr = new HitRecord();
   }
 
-  hit(r: Ray, tMin: number, tMax: number, hr: HitRecord) {
+  hit(r: Ray, tMin: number, tMax: number) {
     let tmpHr: HitRecord = new HitRecord();
     let hitAnything: boolean = false;
     let closestSoFar: number = tMax;

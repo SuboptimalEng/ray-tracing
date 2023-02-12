@@ -10,8 +10,7 @@ const rayColor = (r: Ray, world: HittableList): Vec3 => {
   const white = new Vec3(1.0, 1.0, 1.0);
   const skyBlue = new Vec3(0.5, 0.7, 1.0);
 
-  const hr: HitRecord = new HitRecord();
-  if (world.hit(r, 0, Infinity, hr)) {
+  if (world.hit(r, 0, Infinity)) {
     return vscale(
       vscale(vadd(world.hr.normal as Vec3, new Vec3(1, 1, 1)), 0.5),
       255
