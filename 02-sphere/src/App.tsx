@@ -4,15 +4,23 @@ import { Vec3, dot, vadd, vsub, vscale, unitVector } from "./packages/Vec3";
 
 const hitSphere = (center: Vec3, radius: number, ray: Ray): number => {
   const oc: Vec3 = vsub(ray.origin, center);
-  const a: number = dot(ray.direction, ray.direction);
-  const b: number = 2.0 * dot(oc, ray.direction);
-  const c: number = dot(oc, oc) - radius * radius;
-  const discriminant: number = b * b - 4 * a * c;
+  // slow
+  // const a: number = dot(ray.direction, ray.direction);
+  // const b: number = 2.0 * dot(oc, ray.direction);
+  // const c: number = dot(oc, oc) - radius * radius;
+  // const discriminant: number = b * b - 4 * a * c;
+
+  // fast
+  const a: number = ray.direction.lengthSquared();
+  const half_b: number = dot(oc, ray.direction);
+  const c: number = oc.lengthSquared() - radius * radius;
+  const discriminant: number = half_b * half_b - a * c;
 
   if (discriminant < 0) {
     return -1.0;
   } else {
-    return (-b - Math.sqrt(discriminant)) / (2.0 * a);
+    // return (-b - Math.sqrt(discriminant)) / (2.0 * a);
+    return (-half_b - Math.sqrt(discriminant)) / a;
   }
 };
 
