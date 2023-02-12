@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { HitRecord } from "./packages/HitRecord";
 import { HittableList } from "./packages/HittableList";
 import { Ray } from "./packages/Ray";
