@@ -13,6 +13,15 @@ class Ray {
     // origin + t * direction
     return vadd(this.origin, vscale(this.direction, t));
   }
+
+  unitVector(): Vec3 {
+    const vectorLength = this.direction.length();
+    return new Vec3(
+      this.direction.x / vectorLength,
+      this.direction.y / vectorLength,
+      this.direction.z / vectorLength
+    );
+  }
 }
 
 export { Ray };
