@@ -50,13 +50,22 @@ class Vec3 {
   length(): number {
     return Math.sqrt(this.lengthSquared());
   }
+
+  unitVector(): Vec3 {
+    const vectorLength = this.length();
+    return new Vec3(
+      this.x / vectorLength,
+      this.y / vectorLength,
+      this.z / vectorLength
+    );
+  }
 }
 
-const vadd = (a: Vec3, b: Vec3) => {
+const vadd = (a: Vec3, b: Vec3): Vec3 => {
   return new Vec3(a.x + b.x, a.y + b.y, a.z + b.z);
 };
 
-const vscale = (a: Vec3, n: number) => {
+const vscale = (a: Vec3, n: number): Vec3 => {
   return new Vec3(a.x * n, a.y * n, a.z * n);
 };
 
