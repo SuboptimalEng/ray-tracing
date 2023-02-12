@@ -50,15 +50,6 @@ class Vec3 {
   length(): number {
     return Math.sqrt(this.lengthSquared());
   }
-
-  unitVector(): Vec3 {
-    const vectorLength = this.length();
-    return new Vec3(
-      this.x / vectorLength,
-      this.y / vectorLength,
-      this.z / vectorLength
-    );
-  }
 }
 
 const vadd = (a: Vec3, b: Vec3): Vec3 => {

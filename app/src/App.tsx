@@ -20,33 +20,34 @@ function App() {
   const scaledHorizontal = vscale(horizontal, 0.5);
   const scaledVertical = vscale(vertical, 0.5);
 
-  let lowerLeftCorner = vadd(origin, scaledHorizontal);
-  lowerLeftCorner = vadd(lowerLeftCorner, scaledVertical);
+  let lowerLeftCorner = vsub(origin, scaledHorizontal);
+  lowerLeftCorner = vsub(lowerLeftCorner, scaledVertical);
   lowerLeftCorner = vsub(lowerLeftCorner, new Vec3(0.0, 0.0, focalLength));
 
   const rayColor = (r: Ray): Vec3 => {
     const unitDirection = r.unitVector();
     const t = 0.5 * (unitDirection.y + 1.0);
     const white = new Vec3(1.0, 1.0, 1.0);
-    const skyBlue = new Vec3(0.5, 0.7, 0.0);
+    const black = new Vec3(0.0, 0.0, 0.0);
+    const skyBlue = new Vec3(0.5, 0.7, 1.0);
+    // return vscale(vadd(vscale(white, 1.0 - t), vscale(black, t)), 255);
     return vscale(vadd(vscale(white, 1.0 - t), vscale(skyBlue, t)), 255);
   };
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
-    for (let i = 0; i < canvasWidth + 100; i++) {
-      for (let j = 0; j < canvasHeight + 100; j++) {
-        // for (let j = canvasHeight - 1; j > 0; j--) {
-        //   for (let i = 0; i < canvasWidth; i++) {
+    for (let j = canvasHeight - 1; j > 0; j--) {
+      for (let i = 0; i < canvasWidth; i++) {
         const u = i / (canvasWidth - 1);
-        const v = i / (canvasHeight - 1);
+        const v = j / (canvasHeight - 1);
 
         const uHorizontal = vscale(horizontal, u);
         const vVerical = vscale(vertical, v);
-        let rayDirection = vadd(origin, lowerLeftCorner);
-        rayDirection = vadd(rayDirection, uHorizontal);
+        let rayDirection = vadd(lowerLeftCorner, uHorizontal);
         rayDirection = vadd(rayDirection, vVerical);
         rayDirection = vsub(rayDirection, origin);
         const r: Ray = new Ray(origin, rayDirection);
+
+        // debugger;
 
         const color = rayColor(r);
         ctx.fillStyle = `rgba(${color.x}, ${color.y}, ${color.z}, 1)`;
@@ -61,6 +62,7 @@ function App() {
         // ctx.fillStyle = `rgba(${ir}, ${ig}, ${ib}, 1)`;
         // ctx.fillRect(i, j, 1, 1);
       }
+      // debugger;
     }
   };
 
