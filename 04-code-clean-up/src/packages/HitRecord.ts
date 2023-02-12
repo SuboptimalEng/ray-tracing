@@ -13,15 +13,4 @@ class HitRecord {
   }
 }
 
-// type HitRecord = {
-//   p: Vec3 | undefined;
-//   t: number | undefined;
-//   normal: Vec3 | undefined;
-//   frontFace: boolean | undefined;
-// };
-// const setFaceNormal = (hr: HitRecord, r: Ray, outwardNormal: Vec3) => {
-//   hr.frontFace = dot(r.direction, outwardNormal) < 0;
-//   hr.normal = hr.frontFace ? outwardNormal : vscale(outwardNormal, -1.0);
-// };
-
 export { HitRecord };

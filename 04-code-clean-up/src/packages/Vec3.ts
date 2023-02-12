@@ -9,36 +9,6 @@ class Vec3 {
     this.z = z;
   }
 
-  getNew() {
-    return new Vec3(this.x, this.y, this.z);
-  }
-
-  add(v: Vec3): Vec3 {
-    this.x += v.x;
-    this.y += v.y;
-    this.z += v.z;
-    return new Vec3(this.x, this.y, this.z);
-  }
-
-  subtract(v: Vec3): void {
-    this.x -= v.x;
-    this.y -= v.y;
-    this.z -= v.z;
-  }
-
-  multiply(v: Vec3): void {
-    this.x *= v.x;
-    this.y *= v.y;
-    this.z *= v.z;
-  }
-
-  scale(n: number): Vec3 {
-    this.x *= n;
-    this.y *= n;
-    this.z *= n;
-    return new Vec3(this.x, this.y, this.z);
-  }
-
   lengthSquared(): number {
     return this.x * this.x + this.y * this.y + this.z * this.z;
   }

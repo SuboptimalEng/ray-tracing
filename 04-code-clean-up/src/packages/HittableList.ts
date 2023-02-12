@@ -22,7 +22,6 @@ class HittableList {
         hitAnything = true;
         closestSoFar = tmpHr.t as number;
         this.hr = tmpHr;
-        // hr = tmpHr;
       }
     }
 

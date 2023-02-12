@@ -35,7 +35,6 @@ class Sphere {
     this.hr = hr;
     this.hr.t = root;
     this.hr.p = r.at(this.hr.t);
-    // this.hr.normal = vscale(vsub(this.hr.p, this.center), 1 / this.radius);
     const outwardNormal: Vec3 = vscale(
       vsub(this.hr.p, this.center),
       1.0 / this.radius
