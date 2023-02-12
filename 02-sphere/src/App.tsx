@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import { Ray } from "./packages/Ray";
-import { Vec3, dot, vadd, vsub, vscale } from "./packages/Vec3";
+import { Vec3, dot, vadd, vsub, vscale, unitVector } from "./packages/Vec3";
 
-const hitSphere = (center: Vec3, radius: number, ray: Ray): boolean => {
+const hitSphere = (center: Vec3, radius: number, ray: Ray): number => {
   const oc: Vec3 = vsub(ray.origin, center);
   const a: number = dot(ray.direction, ray.direction);
   const b: number = 2.0 * dot(oc, ray.direction);
   const c: number = dot(oc, oc) - radius * radius;
   const discriminant: number = b * b - 4 * a * c;
-  return discriminant > 0.0;
+
+  if (discriminant < 0) {
+    return -1.0;
+  } else {
+    return (-b - Math.sqrt(discriminant)) / (2.0 * a);
+  }
 };
 
 const rayColor = (r: Ray): Vec3 => {
@@ -16,12 +21,17 @@ const rayColor = (r: Ray): Vec3 => {
   const white = new Vec3(1.0, 1.0, 1.0);
   const skyBlue = new Vec3(0.5, 0.7, 1.0);
 
-  if (hitSphere(new Vec3(0, 0, -1), 0.5, r)) {
-    return vscale(red, 255);
+  let t = hitSphere(new Vec3(0, 0, -1), 0.5, r);
+  if (t > 0.0) {
+    let N: Vec3 = unitVector(vsub(r.at(t), new Vec3(0.0, 0.0, -1.0)));
+    return vscale(vscale(new Vec3(N.x + 1, N.y + 1, N.z + 1), 0.5), 255);
   }
+  // if (hitSphere(new Vec3(0, 0, -1), 0.5, r)) {
+  //   return vscale(red, 255);
+  // }
 
   const unitDirection = r.unitVector();
-  const t = 0.5 * (unitDirection.y + 1.0);
+  t = 0.5 * (unitDirection.y + 1.0);
   // return vscale(vadd(vscale(white, 1.0 - t), vscale(red, t)), 255);
   return vscale(vadd(vscale(white, 1.0 - t), vscale(skyBlue, t)), 255);
 };

@@ -64,4 +64,9 @@ const vscale = (a: Vec3, n: number): Vec3 => {
   return new Vec3(a.x * n, a.y * n, a.z * n);
 };
 
-export { Vec3, dot, vadd, vsub, vscale };
+const unitVector = (a: Vec3): Vec3 => {
+  const vectorLength = a.length();
+  return new Vec3(a.x / vectorLength, a.y / vectorLength, a.z / vectorLength);
+};
+
+export { Vec3, dot, vadd, vsub, vscale, unitVector };
