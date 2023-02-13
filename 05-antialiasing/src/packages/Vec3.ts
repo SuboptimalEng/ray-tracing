@@ -39,4 +39,10 @@ const unitVector = (a: Vec3): Vec3 => {
   return new Vec3(a.x / vectorLength, a.y / vectorLength, a.z / vectorLength);
 };
 
-export { Vec3, dot, vadd, vsub, vscale, unitVector };
+const clamp = (minValue: number, maxValue: number, x: number) => {
+  if (x < minValue) return minValue;
+  if (x > maxValue) return maxValue;
+  return x;
+};
+
+export { Vec3, dot, vadd, vsub, vscale, clamp, unitVector };
