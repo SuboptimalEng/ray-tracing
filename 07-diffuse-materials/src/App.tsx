@@ -41,20 +41,13 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
       randomInUnitSphere()
     );
     return vscale(
-      vscale(
-        rayColor(
-          new Ray(world.hr.p as Vec3, vsub(target, world.hr.p as Vec3)),
-          world,
-          depth - 1
-        ),
-        0.5
+      rayColor(
+        new Ray(world.hr.p as Vec3, vsub(target, world.hr.p as Vec3)),
+        world,
+        depth - 1
       ),
-      1
+      0.5
     );
-    // return vscale(
-    //   vscale(vadd(world.hr.normal as Vec3, new Vec3(1, 1, 1)), 0.5),
-    //   255
-    // );
   }
 
   const unitDirection = r.unitVector();
@@ -67,7 +60,7 @@ function App() {
   const aspectRatio = 16.0 / 9.0;
   const canvasWidth = 400;
   const canvasHeight = Math.floor(canvasWidth / aspectRatio);
-  const pixelSize = 2;
+  const pixelSize = 1;
   const samplesPerPixel = 10;
   const maxDepth = 10;
 
