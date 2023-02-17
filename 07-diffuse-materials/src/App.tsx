@@ -55,6 +55,7 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
     //   // randomInUnitSphere() // 1. first method
     //   randomUnitVector() // 2. second method
     // );
+
     // new (proven correct) method
     const target: Vec3 = vadd(
       world.hr.p as Vec3,
