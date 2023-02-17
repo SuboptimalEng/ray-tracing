@@ -9,6 +9,7 @@ import {
   vscale,
   clamp,
   vsub,
+  randomInHemisphere,
   randomInUnitSphere,
   randomUnitVector,
 } from "./packages/Vec3";
@@ -48,10 +49,16 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
   }
 
   if (world.hit(r, 0.001, Infinity)) {
+    // old (proven incorrect) target
+    // const target: Vec3 = vadd(
+    //   vadd(world.hr.p as Vec3, world.hr.normal as Vec3),
+    //   // randomInUnitSphere() // 1. first method
+    //   randomUnitVector() // 2. second method
+    // );
+    // new (proven correct) method
     const target: Vec3 = vadd(
-      vadd(world.hr.p as Vec3, world.hr.normal as Vec3),
-      // randomInUnitSphere()
-      randomUnitVector()
+      world.hr.p as Vec3,
+      randomInHemisphere(world.hr.normal as Vec3)
     );
     return vscale(
       rayColor(

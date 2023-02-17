@@ -51,9 +51,9 @@ const randomVec3 = (): Vec3 => {
 
 const randomVec3Bounded = (min: number, max: number): Vec3 => {
   return new Vec3(
-    Math.random() * (max - min + 1),
-    Math.random() * (max - min + 1),
-    Math.random() * (max - min + 1)
+    Math.random() * (max - min) + min,
+    Math.random() * (max - min) + min,
+    Math.random() * (max - min) + min
   );
 };
 
@@ -70,6 +70,15 @@ const randomUnitVector = () => {
   return unitVector(randomInUnitSphere());
 };
 
+const randomInHemisphere = (normal: Vec3) => {
+  const inUnitSphere: Vec3 = randomInUnitSphere();
+  if (dot(inUnitSphere, normal) > 0.0) {
+    return inUnitSphere;
+  } else {
+    return vscale(inUnitSphere, -1.0);
+  }
+};
+
 export {
   Vec3,
   dot,
@@ -78,6 +87,7 @@ export {
   vscale,
   clamp,
   unitVector,
+  randomInHemisphere,
   randomInUnitSphere,
   randomUnitVector,
 };
