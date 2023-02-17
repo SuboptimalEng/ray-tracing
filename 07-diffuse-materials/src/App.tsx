@@ -8,8 +8,9 @@ import {
   vadd,
   vscale,
   clamp,
-  randomInUnitSphere,
   vsub,
+  randomInUnitSphere,
+  randomUnitVector,
 } from "./packages/Vec3";
 
 const rayColorPerPixelFn = (
@@ -19,11 +20,22 @@ const rayColorPerPixelFn = (
   let r = pixelColor.x;
   let g = pixelColor.y;
   let b = pixelColor.z;
+
   const scale = 1.0 / samplesPerPixel;
-  r *= scale;
-  g *= scale;
-  b *= scale;
-  return new Vec3(clamp(0, 255, r), clamp(0, 255, g), clamp(0, 255, b));
+  // r *= scale;
+  // g *= scale;
+  // b *= scale;
+
+  // gamma correction
+  r = Math.sqrt(r * scale);
+  g = Math.sqrt(g * scale);
+  b = Math.sqrt(b * scale);
+
+  return new Vec3(
+    clamp(0, 0.99, r) * 255,
+    clamp(0, 0.99, g) * 255,
+    clamp(0, 0.99, b) * 255
+  );
 };
 
 const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
@@ -35,10 +47,11 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
     return new Vec3(0.0, 0.0, 0.0);
   }
 
-  if (world.hit(r, 0, Infinity)) {
+  if (world.hit(r, 0.001, Infinity)) {
     const target: Vec3 = vadd(
       vadd(world.hr.p as Vec3, world.hr.normal as Vec3),
-      randomInUnitSphere()
+      // randomInUnitSphere()
+      randomUnitVector()
     );
     return vscale(
       rayColor(
@@ -52,17 +65,18 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
 
   const unitDirection = r.unitVector();
   const t = 0.5 * (unitDirection.y + 1.0);
-  return vscale(vadd(vscale(white, 1.0 - t), vscale(skyBlue, t)), 255);
+  return vadd(vscale(white, 1.0 - t), vscale(skyBlue, t));
 };
 
 function App() {
   // canvas
+  const FACTOR = 20;
   const aspectRatio = 16.0 / 9.0;
   const canvasWidth = 400;
   const canvasHeight = Math.floor(canvasWidth / aspectRatio);
   const pixelSize = 1;
-  const samplesPerPixel = 10;
-  const maxDepth = 10;
+  const samplesPerPixel = FACTOR;
+  const maxDepth = FACTOR;
 
   const cam: Camera = new Camera();
   const world: HittableList = new HittableList();

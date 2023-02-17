@@ -66,4 +66,18 @@ const randomInUnitSphere = () => {
   }
 };
 
-export { Vec3, dot, vadd, vsub, vscale, clamp, unitVector, randomInUnitSphere };
+const randomUnitVector = () => {
+  return unitVector(randomInUnitSphere());
+};
+
+export {
+  Vec3,
+  dot,
+  vadd,
+  vsub,
+  vscale,
+  clamp,
+  unitVector,
+  randomInUnitSphere,
+  randomUnitVector,
+};
