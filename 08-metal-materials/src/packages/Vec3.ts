@@ -16,6 +16,14 @@ class Vec3 {
   length(): number {
     return Math.sqrt(this.lengthSquared());
   }
+
+  nearZero(): boolean {
+    return (
+      Math.abs(this.x) < 0.001 &&
+      Math.abs(this.y) < 0.001 &&
+      Math.abs(this.z) < 0.001
+    );
+  }
 }
 
 const dot = (a: Vec3, b: Vec3): number => {
@@ -28,6 +36,10 @@ const vadd = (a: Vec3, b: Vec3): Vec3 => {
 
 const vsub = (a: Vec3, b: Vec3): Vec3 => {
   return new Vec3(a.x - b.x, a.y - b.y, a.z - b.z);
+};
+
+const vmul = (a: Vec3, b: Vec3): Vec3 => {
+  return new Vec3(a.x * b.x, a.y * b.y, a.z * b.z);
 };
 
 const vscale = (a: Vec3, n: number): Vec3 => {
@@ -47,6 +59,10 @@ const clamp = (minValue: number, maxValue: number, x: number) => {
 
 const randomVec3 = (): Vec3 => {
   return new Vec3(Math.random(), Math.random(), Math.random());
+};
+
+const reflect = (v: Vec3, n: Vec3) => {
+  return vsub(v, vscale(n, 2 * dot(v, n)));
 };
 
 const randomVec3Bounded = (min: number, max: number): Vec3 => {
@@ -82,7 +98,9 @@ const randomInHemisphere = (normal: Vec3) => {
 export {
   Vec3,
   dot,
+  reflect,
   vadd,
+  vmul,
   vsub,
   vscale,
   clamp,

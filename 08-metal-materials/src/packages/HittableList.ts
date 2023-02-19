@@ -1,6 +1,9 @@
 import { HitRecord } from "./HitRecord";
+import { Lambertian } from "./Lambertian";
+import { Metal } from "./Metal";
 import { Ray } from "./Ray";
 import { Sphere } from "./Sphere";
+import { Vec3 } from "./Vec3";
 
 class HittableList {
   hr: HitRecord;
@@ -21,7 +24,28 @@ class HittableList {
       if (object.hit(r, tMin, closestSoFar, tmpHr)) {
         hitAnything = true;
         closestSoFar = tmpHr.t as number;
+        let material;
+        let materialType = object.materialType;
+        if (materialType === "Lambertian") {
+          material = new Lambertian(
+            new Vec3(
+              object.material.albedo.x,
+              object.material.albedo.y,
+              object.material.albedo.y
+            )
+          );
+        } else {
+          material = new Metal(
+            new Vec3(
+              object.material.albedo.x,
+              object.material.albedo.y,
+              object.material.albedo.y
+            ),
+            object.material.fuzz
+          );
+        }
         this.hr = tmpHr;
+        this.hr.material = material;
       }
     }
 

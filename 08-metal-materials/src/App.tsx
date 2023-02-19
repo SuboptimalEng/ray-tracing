@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { Camera } from "./packages/Camera";
+import { HitRecord } from "./packages/HitRecord";
 import { HittableList } from "./packages/HittableList";
+import { Lambertian } from "./packages/Lambertian";
 import { Ray } from "./packages/Ray";
 import { Sphere } from "./packages/Sphere";
 import {
@@ -12,6 +14,7 @@ import {
   randomInHemisphere,
   randomInUnitSphere,
   randomUnitVector,
+  vmul,
 } from "./packages/Vec3";
 
 const rayColorPerPixelFn = (
@@ -44,6 +47,8 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
   const white = new Vec3(1.0, 1.0, 1.0);
   const skyBlue = new Vec3(0.5, 0.7, 1.0);
 
+  const hr = new HitRecord();
+
   if (depth <= 0) {
     return new Vec3(0.0, 0.0, 0.0);
   }
@@ -56,19 +61,27 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
     //   randomUnitVector() // 2. second method
     // );
 
-    // new (proven correct) method
-    const target: Vec3 = vadd(
-      world.hr.p as Vec3,
-      randomInHemisphere(world.hr.normal as Vec3)
-    );
-    return vscale(
-      rayColor(
-        new Ray(world.hr.p as Vec3, vsub(target, world.hr.p as Vec3)),
-        world,
-        depth - 1
-      ),
-      0.5
-    );
+    let scattered: Ray = new Ray(new Vec3(0, 0, 0), new Vec3(0, 0, 0));
+    let attenuation: Vec3 = new Vec3(0, 0, 0);
+    if (world.hr.material.scatter(r, world.hr, attenuation, scattered)) {
+      return vmul(rayColor(scattered, world, depth - 1), attenuation);
+    }
+
+    return new Vec3(0.0, 0.0, 0.0);
+
+    // // new (proven correct) method
+    // const target: Vec3 = vadd(
+    //   world.hr.p as Vec3,
+    //   randomInHemisphere(world.hr.normal as Vec3)
+    // );
+    // return vscale(
+    //   rayColor(
+    //     new Ray(world.hr.p as Vec3, vsub(target, world.hr.p as Vec3)),
+    //     world,
+    //     depth - 1
+    //   ),
+    //   0.5
+    // );
   }
 
   const unitDirection = r.unitVector();
@@ -78,18 +91,34 @@ const rayColor = (r: Ray, world: HittableList, depth: number): Vec3 => {
 
 function App() {
   // canvas
-  const FACTOR = 20;
+  const FACTOR = 25;
   const aspectRatio = 16.0 / 9.0;
   const canvasWidth = 400;
   const canvasHeight = Math.floor(canvasWidth / aspectRatio);
   const pixelSize = 1;
-  const samplesPerPixel = FACTOR;
+  const samplesPerPixel = FACTOR * 2;
   const maxDepth = FACTOR;
 
   const cam: Camera = new Camera();
   const world: HittableList = new HittableList();
-  world.objects.push(new Sphere(new Vec3(0, 0, -1), 0.5));
-  world.objects.push(new Sphere(new Vec3(0, -100.5, -1), 100.0));
+
+  const materialGround = new Vec3(0.8, 0.8, 0.0);
+  const materialCenter = new Vec3(0.7, 0.3, 0.3);
+  const materialLeft = new Vec3(0.8, 0.8, 0.8);
+  const materialRight = new Vec3(0.8, 0.6, 0.2);
+
+  world.objects.push(
+    new Sphere(new Vec3(0, -100.5, -1), 100.0, materialGround, "Lambertian", 0)
+  );
+  world.objects.push(
+    new Sphere(new Vec3(0, 0, -1), 0.5, materialCenter, "Lambertian", 0)
+  );
+  world.objects.push(
+    new Sphere(new Vec3(-1, 0, -1), 0.5, materialLeft, "Metal", 0.3)
+  );
+  world.objects.push(
+    new Sphere(new Vec3(1, 0, -1), 0.5, materialRight, "Metal", 1.0)
+  );
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
     for (let j = canvasHeight - 1; j > 0; j -= pixelSize) {

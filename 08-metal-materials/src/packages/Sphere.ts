@@ -1,16 +1,34 @@
 import { HitRecord } from "./HitRecord";
+import { Lambertian } from "./Lambertian";
+import { Metal } from "./Metal";
 import { Ray } from "./Ray";
 import { dot, Vec3, vscale, vsub } from "./Vec3";
+
+type MaterialTypes_t = "Lambertian" | "Metal";
 
 class Sphere {
   center: Vec3;
   hr: HitRecord;
   radius: number;
+  material: Lambertian | Metal;
+  materialType: MaterialTypes_t;
 
-  constructor(p: Vec3, r: number) {
+  constructor(
+    p: Vec3,
+    r: number,
+    material: Vec3,
+    materialType: MaterialTypes_t,
+    fuzz: number
+  ) {
     this.radius = r;
     this.center = new Vec3(p.x, p.y, p.z);
     this.hr = new HitRecord();
+    this.materialType = materialType;
+    if (this.materialType === "Lambertian") {
+      this.material = new Lambertian(material, fuzz);
+    } else {
+      this.material = new Metal(material, fuzz);
+    }
   }
 
   hit(r: Ray, tMin: number, tMax: number, hr: HitRecord) {
@@ -35,6 +53,7 @@ class Sphere {
     this.hr = hr;
     this.hr.t = root;
     this.hr.p = r.at(this.hr.t);
+    this.hr.material = this.material;
     const outwardNormal: Vec3 = vscale(
       vsub(this.hr.p, this.center),
       1.0 / this.radius
