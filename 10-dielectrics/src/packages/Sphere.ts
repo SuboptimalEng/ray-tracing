@@ -1,16 +1,19 @@
+import { Dielectric } from "./Dielectric";
 import { HitRecord } from "./HitRecord";
 import { Lambertian } from "./Lambertian";
 import { Metal } from "./Metal";
 import { Ray } from "./Ray";
 import { dot, Vec3, vscale, vsub } from "./Vec3";
 
+export type MaterialTypes_t = Lambertian | Metal | Dielectric;
+
 class Sphere {
   center: Vec3;
   hr: HitRecord;
   radius: number;
-  material: Lambertian | Metal;
+  material: MaterialTypes_t;
 
-  constructor(p: Vec3, r: number, material: Lambertian | Metal) {
+  constructor(p: Vec3, r: number, material: MaterialTypes_t) {
     this.radius = r;
     this.center = new Vec3(p.x, p.y, p.z);
     this.hr = new HitRecord();

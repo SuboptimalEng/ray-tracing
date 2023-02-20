@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Camera } from "./packages/Camera";
-import { HitRecord } from "./packages/HitRecord";
+import { Dielectric } from "./packages/Dielectric";
 import { HittableList } from "./packages/HittableList";
 import { Lambertian } from "./packages/Lambertian";
 import { Metal } from "./packages/Metal";
@@ -83,15 +83,17 @@ function App() {
   const canvasWidth = 400;
   const canvasHeight = Math.floor(canvasWidth / aspectRatio);
   const pixelSize = 1;
-  const samplesPerPixel = 50;
-  const maxDepth = 25;
+  const samplesPerPixel = 25;
+  const maxDepth = 10;
 
   const cam: Camera = new Camera();
   const world: HittableList = new HittableList();
 
-  const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0), 0);
-  const materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3), 0);
-  const materialLeft = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
+  const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));
+  // const materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3));
+  // const materialLeft = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
+  const materialCenter = new Dielectric(1.5);
+  const materialLeft = new Dielectric(1.5);
   const materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
 
   world.objects.push(

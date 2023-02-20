@@ -65,6 +65,19 @@ const reflect = (v: Vec3, n: Vec3) => {
   return vsub(v, vscale(n, 2 * dot(v, n)));
 };
 
+const refract = (uv: Vec3, n: Vec3, etaiOverEtat: number) => {
+  const cosTheta: number = Math.min(dot(vscale(uv, -1), n), 1.0);
+  const rayOutPerpendicular: Vec3 = vscale(
+    vadd(uv, vscale(n, cosTheta)),
+    etaiOverEtat
+  );
+  const rayOutParallel: Vec3 = vscale(
+    n,
+    -1.0 * Math.sqrt(Math.abs(1.0 - rayOutPerpendicular.length()))
+  );
+  return vadd(rayOutPerpendicular, rayOutParallel);
+};
+
 const randomVec3Bounded = (min: number, max: number): Vec3 => {
   return new Vec3(
     Math.random() * (max - min) + min,
@@ -98,7 +111,6 @@ const randomInHemisphere = (normal: Vec3) => {
 export {
   Vec3,
   dot,
-  reflect,
   vadd,
   vmul,
   vsub,
@@ -108,4 +120,6 @@ export {
   randomInHemisphere,
   randomInUnitSphere,
   randomUnitVector,
+  reflect,
+  refract,
 };

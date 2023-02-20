@@ -1,6 +1,6 @@
 import { Lambertian } from "./Lambertian";
-import { Metal } from "./Metal";
 import { Ray } from "./Ray";
+import { MaterialTypes_t } from "./Sphere";
 import { dot, Vec3, vscale } from "./Vec3";
 
 class HitRecord {
@@ -8,10 +8,10 @@ class HitRecord {
   t: number | undefined;
   normal: Vec3 | undefined;
   frontFace: boolean | undefined;
-  material: Lambertian | Metal;
+  material: MaterialTypes_t;
 
   constructor() {
-    this.material = new Lambertian(new Vec3(0.0, 0.0, 0.0), 0.0);
+    this.material = new Lambertian(new Vec3(0.0, 0.0, 0.0));
   }
 
   setFaceNormal(r: Ray, outwardNormal: Vec3) {
