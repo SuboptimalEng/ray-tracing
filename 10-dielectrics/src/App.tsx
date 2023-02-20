@@ -99,6 +99,7 @@ function App() {
   );
   world.objects.push(new Sphere(new Vec3(0, 0, -1), 0.5, materialCenter));
   world.objects.push(new Sphere(new Vec3(-1, 0, -1), 0.5, materialLeft));
+  world.objects.push(new Sphere(new Vec3(-1, 0, -1), -0.4, materialLeft));
   world.objects.push(new Sphere(new Vec3(1, 0, -1), 0.5, materialRight));
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
