@@ -90,11 +90,9 @@ function App() {
   const world: HittableList = new HittableList();
 
   const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));
-  // const materialCenter = new Lambertian(new Vec3(0.7, 0.3, 0.3));
-  // const materialLeft = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
-  const materialCenter = new Dielectric(1.5);
+  const materialCenter = new Lambertian(new Vec3(0.1, 0.2, 0.5));
   const materialLeft = new Dielectric(1.5);
-  const materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
+  const materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 0.0);
 
   world.objects.push(
     new Sphere(new Vec3(0, -100.5, -1), 100.0, materialGround)
