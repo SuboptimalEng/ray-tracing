@@ -73,7 +73,7 @@ const refract = (uv: Vec3, n: Vec3, etaiOverEtat: number) => {
   );
   const rayOutParallel: Vec3 = vscale(
     n,
-    -1.0 * Math.sqrt(Math.abs(1.0 - rayOutPerpendicular.length()))
+    -1.0 * Math.sqrt(Math.abs(1.0 - rayOutPerpendicular.lengthSquared()))
   );
   return vadd(rayOutPerpendicular, rayOutParallel);
 };
