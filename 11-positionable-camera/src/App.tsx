@@ -65,21 +65,31 @@ function App() {
   const samplesPerPixel = 25;
   const maxDepth = 10;
 
-  const cam: Camera = new Camera();
+  const cam: Camera = new Camera(90, aspectRatio);
   const world: HittableList = new HittableList();
 
-  const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));
-  const materialCenter = new Lambertian(new Vec3(0.1, 0.2, 0.5));
-  const materialLeft = new Dielectric(1.5);
-  const materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 0.0);
+  const radius = Math.cos(Math.PI / 4.0);
+  const materialLeft = new Lambertian(new Vec3(0.0, 0.0, 1.0));
+  const materialRight = new Lambertian(new Vec3(1.0, 0.0, 0.0));
 
   world.objects.push(
-    new Sphere(new Vec3(0, -100.5, -1), 100.0, materialGround)
+    new Sphere(new Vec3(-radius, 0, -1), radius, materialLeft)
   );
-  world.objects.push(new Sphere(new Vec3(0, 0, -1), 0.5, materialCenter));
-  world.objects.push(new Sphere(new Vec3(-1, 0, -1), 0.5, materialLeft));
-  world.objects.push(new Sphere(new Vec3(-1, 0, -1), -0.4, materialLeft));
-  world.objects.push(new Sphere(new Vec3(1, 0, -1), 0.5, materialRight));
+  world.objects.push(
+    new Sphere(new Vec3(radius, 0, -1), radius, materialRight)
+  );
+
+  // const materialGround = new Lambertian(new Vec3(0.8, 0.8, 0.0));
+  // const materialCenter = new Lambertian(new Vec3(0.1, 0.2, 0.5));
+  // const materialLeft = new Dielectric(1.5);
+  // const materialRight = new Metal(new Vec3(0.8, 0.6, 0.2), 0.0);
+  // world.objects.push(
+  //   new Sphere(new Vec3(0, -100.5, -1), 100.0, materialGround)
+  // );
+  // world.objects.push(new Sphere(new Vec3(0, 0, -1), 0.5, materialCenter));
+  // world.objects.push(new Sphere(new Vec3(-1, 0, -1), 0.5, materialLeft));
+  // world.objects.push(new Sphere(new Vec3(-1, 0, -1), -0.4, materialLeft));
+  // world.objects.push(new Sphere(new Vec3(1, 0, -1), 0.5, materialRight));
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
     for (let j = canvasHeight - 1; j > 0; j -= pixelSize) {

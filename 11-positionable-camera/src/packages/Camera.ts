@@ -12,9 +12,18 @@ class Camera {
   #vertical: Vec3;
   #lowerLeftCorner: Vec3;
 
-  constructor() {
-    this.aspectRatio = 16.0 / 9.0;
-    this.viewportHeight = 2.0;
+  private degreesToRadians(degrees: number) {
+    return (degrees * Math.PI) / 180;
+  }
+
+  constructor(verticalFieldOfView: number, aspectRatio: number) {
+    const theta = this.degreesToRadians(verticalFieldOfView);
+    const h = Math.tan(theta / 2.0);
+
+    // this.aspectRatio = 16.0 / 9.0;
+    // this.viewportHeight = 2.0;
+    this.aspectRatio = aspectRatio;
+    this.viewportHeight = 2.0 * h;
     this.viewportWidth = this.aspectRatio * this.viewportHeight;
     this.focalLength = 1.0;
 
