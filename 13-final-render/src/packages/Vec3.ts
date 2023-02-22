@@ -143,6 +143,7 @@ export {
   randomInUnitDisk,
   randomInUnitSphere,
   randomUnitVector,
+  randomVec3Bounded,
   reflect,
   refract,
 };
