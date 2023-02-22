@@ -86,6 +86,10 @@ const refract = (uv: Vec3, n: Vec3, etaiOverEtat: number) => {
   return vadd(rayOutPerpendicular, rayOutParallel);
 };
 
+const randomBounded = (min: number, max: number): number => {
+  return Math.random() * (max - min) + min;
+};
+
 const randomVec3Bounded = (min: number, max: number): Vec3 => {
   return new Vec3(
     Math.random() * (max - min) + min,
@@ -94,7 +98,7 @@ const randomVec3Bounded = (min: number, max: number): Vec3 => {
   );
 };
 
-const randomInUnitSphere = () => {
+const randomInUnitSphere = (): Vec3 => {
   while (true) {
     const p = randomVec3Bounded(-1, 1);
     if (p.lengthSquared() < 1) {
@@ -103,8 +107,17 @@ const randomInUnitSphere = () => {
   }
 };
 
-const randomUnitVector = () => {
+const randomUnitVector = (): Vec3 => {
   return unitVector(randomInUnitSphere());
+};
+
+const randomInUnitDisk = (): Vec3 => {
+  while (true) {
+    const p = new Vec3(randomBounded(-1, 1), randomBounded(-1, 1), 0);
+    if (p.lengthSquared() < 1) {
+      return p;
+    }
+  }
 };
 
 const randomInHemisphere = (normal: Vec3) => {
@@ -127,6 +140,7 @@ export {
   clamp,
   unitVector,
   randomInHemisphere,
+  randomInUnitDisk,
   randomInUnitSphere,
   randomUnitVector,
   reflect,

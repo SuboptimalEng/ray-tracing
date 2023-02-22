@@ -6,7 +6,7 @@ import { Lambertian } from "./packages/Lambertian";
 import { Metal } from "./packages/Metal";
 import { Ray } from "./packages/Ray";
 import { Sphere } from "./packages/Sphere";
-import { Vec3, vadd, vscale, clamp, vmul } from "./packages/Vec3";
+import { Vec3, vadd, vscale, clamp, vmul, vsub } from "./packages/Vec3";
 
 const rayColorPerPixelFn = (
   pixelColor: Vec3,
@@ -79,12 +79,20 @@ function App() {
   world.objects.push(new Sphere(new Vec3(-1, 0, -1), -0.45, materialLeft));
   world.objects.push(new Sphere(new Vec3(1, 0, -1), 0.5, materialRight));
 
+  const lookFrom = new Vec3(3, 3, 2);
+  const lookAt = new Vec3(0, 0, -1);
+  const vup = new Vec3(0, 1, 0);
+  const aperture = 2.0;
+  const distanceToFocus = vsub(lookFrom, lookAt).length();
+
   const cam: Camera = new Camera(
-    new Vec3(-2, 2, 1),
-    new Vec3(0, 0, -1),
-    new Vec3(0, 1, 0),
+    lookFrom,
+    lookAt,
+    vup,
     20,
-    aspectRatio
+    aspectRatio,
+    aperture,
+    distanceToFocus
   );
 
   const drawImage = (ctx: CanvasRenderingContext2D) => {
