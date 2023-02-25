@@ -21,11 +21,17 @@ npm run dev
 
 ## 03-spheres-refactor
 
+## 04-code-clean-up (same as 03)
+
 ## 05-antialiasing
+
+## 06-code-clean-up (same as 05)
 
 ## 07-diffuse-materials
 
 ## 08-metal-materials
+
+## 09-code-clean-up (same as 08)
 
 ## 10-dielectrics
 
