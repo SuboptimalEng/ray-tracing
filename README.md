@@ -2,7 +2,7 @@
 
 Learning the basics of ray tracing in JavaScript using Peter Shirley's book:
 
-- [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html).
+- [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html)
 
 ## 00-output-image
 
