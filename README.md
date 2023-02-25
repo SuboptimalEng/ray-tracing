@@ -25,11 +25,11 @@ npm run dev
 
 <img src="/_demos/02-sphere.png">
 
-## 03-spheres-refactor (and 04)
+## 03-spheres-refactor + 04-code-clean-up
 
 <img src="/_demos/03-spheres-refactor.png">
 
-## 05-antialiasing (and 06)
+## 05-antialiasing + 06-code-clean-up
 
 <img src="/_demos/05-antialiasing.png">
 
@@ -37,7 +37,7 @@ npm run dev
 
 <img src="/_demos/07-diffuse-materials.png">
 
-## 08-metal-materials (and 09)
+## 08-metal-materials + 09-code-clean-up
 
 <img src="/_demos/08-metal-materials.png">
 
