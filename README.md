@@ -15,28 +15,44 @@ npm run dev
 
 ## 00-output-image
 
+<img src="/_demos/00-output-image.png">
+
 ## 01-skybox
+
+<img src="/_demos/01-skybox.png">
 
 ## 02-sphere
 
-## 03-spheres-refactor
+<img src="/_demos/02-sphere.png">
 
-## 04-code-clean-up (same as 03)
+## 03-spheres-refactor (and 04)
 
-## 05-antialiasing
+<img src="/_demos/03-spheres-refactor.png">
 
-## 06-code-clean-up (same as 05)
+## 05-antialiasing (and 06)
+
+<img src="/_demos/05-antialiasing.png">
 
 ## 07-diffuse-materials
 
-## 08-metal-materials
+<img src="/_demos/07-diffuse-materials.png">
 
-## 09-code-clean-up (same as 08)
+## 08-metal-materials (and 09)
+
+<img src="/_demos/08-metal-materials.png">
 
 ## 10-dielectrics
 
+<img src="/_demos/10-dielectrics.png">
+
 ## 11-positionable-camera
+
+<img src="/_demos/11-positionable-camera.png">
 
 ## 12-depth-of-field
 
+<img src="/_demos/12-depth-of-field.png">
+
 ## 13-final-render (⚠️ slow to load)
+
+<img src="/_demos/13-final-render.png">
