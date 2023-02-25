@@ -1,7 +1,7 @@
 # 🌄 Raytracer in JavaScript
 
 This repo contains the code for my raytracer built in JavaScript. I made it using Pete Shirley's
-book [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) as a reference.
+[Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) book as a reference.
 
 Each folder is self-contained and built incrementally on the previous one. Here's an example of
 how you can run the `08-metal-materials` demo:
