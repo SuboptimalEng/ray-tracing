@@ -1,4 +1,4 @@
-# 🌄 Raytracer in JavaScript
+# 📚 Ray Tracing in JavaScript
 
 This repo contains the code for my raytracer built in JavaScript. I made it using Pete Shirley's
 [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) book as a reference.
