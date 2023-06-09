@@ -6,7 +6,7 @@ how you can run the `08-metal-materials` demo:
 
 ```
 git clone https://github.com/SuboptimalEng/raytracer-js.git
-cd raytracer-js/08-metal-materials/
+cd ray-tracing/typescript/08-metal-materials/
 npm install
 npm run dev
 ```
