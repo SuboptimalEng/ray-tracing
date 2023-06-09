@@ -1,4 +1,4 @@
-# 📚 Ray Tracer in TypeScript
+# 📚 Ray Tracing in TypeScript
 
 This repo contains the code for my raytracer built in TypeScript. Each folder is
 self-contained and built incrementally on the previous one. Here's an example of
