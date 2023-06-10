@@ -1,6 +1,6 @@
 # 📚 Ray Tracing in TypeScript
 
-This repo contains the code for my raytracer built in TypeScript. Each folder is
+This repo contains the code for my ray tracer built in TypeScript. Each folder is
 self-contained and built incrementally on the previous one. Here's an example of
 how you can run the `08-metal-materials` demo:
 
