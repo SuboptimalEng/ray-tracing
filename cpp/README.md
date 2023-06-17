@@ -7,7 +7,7 @@ of how you can run the `00-output-image` demo on MacOS:
 ```
 git clone https://github.com/SuboptimalEng/raytracer-js.git
 cd ray-tracing/cpp/00-output-image/
-g++ main.cpp
+g++ -std=c++11 main.cpp
 ./a.out >> image.ppm
 # open the image.pmm file in finder
 ```
