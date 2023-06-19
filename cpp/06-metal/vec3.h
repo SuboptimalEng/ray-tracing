@@ -61,8 +61,8 @@ class Vec3 {
     return Vec3(random_double(min, max), random_double(min, max), random_double(min, max));
   }
 
+  // return true if the vector is close to zero in all dimensions.
   bool near_zero() const {
-    // Return true if the vector is close to zero in all dimensions.
     const auto s = 1e-8;
     return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
   }
@@ -126,7 +126,7 @@ Vec3 random_in_hemisphere(const Vec3& normal) {
   }
 }
 
-vec3 reflect(const vec3& v, const vec3& n) { return v - 2 * dot(v, n) * n; }
+Vec3 reflect(const Vec3& v, const Vec3& n) { return v - 2 * dot(v, n) * n; }
 
 // note: type alias forVec3
 using Point3 = Vec3;  // 3d point
